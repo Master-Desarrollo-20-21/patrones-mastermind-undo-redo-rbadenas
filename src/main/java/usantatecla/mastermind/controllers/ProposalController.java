@@ -3,15 +3,16 @@ package usantatecla.mastermind.controllers;
 import java.util.List;
 
 import usantatecla.mastermind.models.Combination;
-import usantatecla.mastermind.models.Game;
-import usantatecla.mastermind.models.State;
+import usantatecla.mastermind.models.Session;
 import usantatecla.mastermind.types.Color;
 import usantatecla.mastermind.types.Error;
 
-public class ProposalController extends Controller {
+public class ProposalController {
 
-	public ProposalController(Game game, State state) {
-		super(game, state);
+	private Session session;
+
+	public ProposalController(Session session) {
+		this.session = session;
 	}
 
 	public Error addProposedCombination(List<Color> colors) {
@@ -32,41 +33,36 @@ public class ProposalController extends Controller {
 			}
 		}
 		if (error == null){
-			this.game.addProposedCombination(colors);
-			if (this.game.isWinner() || this.game.isLooser()) {
-				this.state.next();
+			this.session.addProposedCombination(colors);
+			if (this.session.isWinner() || this.session.isLooser()) {
+				this.session.next();
 			}
 		}
 		return error;	
 	}
 
 	public boolean isWinner() {
-		return this.game.isWinner();
+		return this.session.isWinner();
 	}
 
 	public boolean isLooser() {
-		return this.game.isLooser();
+		return this.session.isLooser();
 	}
-	
+
 	public int getAttempts() {
-		return this.game.getAttempts();
+		return this.session.getAttempts();
 	}
 
 	public List<Color> getColors(int position) {
-		return this.game.getColors(position);
+		return this.session.getColors(position);
 	}
 
 	public int getBlacks(int position) {
-		return this.game.getBlacks(position);
+		return this.session.getBlacks(position);
 	}
 
 	public int getWhites(int position) {
-		return this.game.getWhites(position);
+		return this.session.getWhites(position);
 	}
 	
-	@Override
-	public void accept(ControllersVisitor controllersVisitor) {
-		controllersVisitor.visit(this);
-	}
-
 }

@@ -8,8 +8,11 @@ public enum MessageView {
 	PROPOSED_COMBINATION("Propose a combination: "),
 	TITLE("----- MASTERMIND -----"),
 	WINNER("You've won!!! ;-)"),
-	LOOSER("You've lost!!! :-(");
-
+	LOOSER("You've lost!!! :-("),
+	UNDO_COMMAND("Undo previous Proposal"),
+	REDO_COMMAND("Redo previous Proposal"),
+	MENU_TITLE("----- Select an option ----");
+	
 	private String message;
 	
 	private MessageView(String message) {

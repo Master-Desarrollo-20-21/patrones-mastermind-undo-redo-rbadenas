@@ -10,11 +10,8 @@ public class Game {
 	private static final int MAX_LONG = 10;
 
 	private SecretCombination secretCombination;
-
 	private List<ProposedCombination> proposedCombinations;
-
 	private List<Result> results;
-
 	private int attempts;
 
 	public Game() {
@@ -61,6 +58,24 @@ public class Game {
 
 	public int getWidth() {
 		return Combination.getWidth();
+	}
+
+	Memento createMemento() {
+        return new Memento(this.getCombinationsCopy());
+    }
+
+    void set(Memento memento) {
+		this.proposedCombinations = memento.getProposedCombinations();
+		this.attempts = this.proposedCombinations.size();
+
+		this.results.clear();
+		for (ProposedCombination proposedCombination : proposedCombinations) {
+			this.results.add(this.secretCombination.getResult(proposedCombination));
+		}
+    }
+
+	private List<ProposedCombination> getCombinationsCopy() {
+		return new ArrayList<ProposedCombination>(this.proposedCombinations);
 	}
 
 }
