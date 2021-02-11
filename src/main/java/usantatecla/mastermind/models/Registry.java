@@ -6,48 +6,44 @@ public class Registry {
     
 	private Game game;
     private ArrayList<Memento> mementos;
-	private int currentMementoIndex;
+	private int firstPrevious;
 	
 	public Registry(Game game) {
 		this.game = game;
 		this.mementos = new ArrayList<Memento>();
-		this.currentMementoIndex = 0;
+		this.firstPrevious = 0;
 		this.register();
 	}
 
 	public void register() {
-		for (int i = 0; i < this.currentMementoIndex; i++) {
+		for (int i = 0; i < this.firstPrevious; i++) {
 			this.mementos.remove(0);
+			this.firstPrevious--;
 		}
-		this.currentMementoIndex = 0;
-		this.mementos.add(this.currentMementoIndex, this.game.createMemento());
+		this.mementos.add(this.firstPrevious, this.game.createMemento());
 	}
 
 	public void undo() {
-		this.currentMementoIndex++;
-		this.game.set(this.getCurrentMemento());
+		this.firstPrevious++;
+		this.game.set(this.getFirstPreviousMemento());
 	}
 
 	public void redo() {
-		this.currentMementoIndex--;
-		this.game.set(this.getCurrentMemento());
+		this.firstPrevious--;
+		this.game.set(this.getFirstPreviousMemento());
 	}
 
 	public boolean isUndoable() {
-		return this.currentMementoIndex < this.mementos.size() - 1;
+
+		return this.firstPrevious < this.mementos.size() - 1;
 	}
 
 	public boolean isRedoable() {
-		return this.currentMementoIndex > 0;
+		return this.firstPrevious > 0;
 	}
 
-	public void reset() {
-		this.mementos = new ArrayList<Memento>();
-		this.currentMementoIndex = 0;
-    }
-
-	private Memento getCurrentMemento(){
-		return this.mementos.get(this.currentMementoIndex);
+	private Memento getFirstPreviousMemento(){
+		return this.mementos.get(this.firstPrevious);
 	}
 
 }
