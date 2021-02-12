@@ -21,10 +21,8 @@ class ProposalView extends WithConsoleView {
 		do {
 			List<Color> colors = new ProposedCombinationView(playController).read();
 			error = playController.addProposedCombination(colors);
-			if (error != null) {
-				new ErrorView(error).writeln();
-			}
-		} while (error != null);
+			new ErrorView(error).writeln();
+		} while (error != Error.NO_ERROR);
 	}
 
 	private void printAllAttempts(PlayController playController) {

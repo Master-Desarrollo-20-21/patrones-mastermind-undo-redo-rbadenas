@@ -16,7 +16,7 @@ public class ProposalController {
 	}
 
 	public Error addProposedCombination(List<Color> colors) {
-		Error error = null;
+		Error error = Error.NO_ERROR;
 		if (colors.size() != Combination.getWidth()) {
 			error = Error.WRONG_LENGTH;
 		} else {
@@ -32,7 +32,7 @@ public class ProposalController {
 				}				
 			}
 		}
-		if (error == null){
+		if (error == Error.NO_ERROR){
 			this.session.addProposedCombination(colors);
 			if (this.session.isWinner() || this.session.isLooser()) {
 				this.session.next();

@@ -1,5 +1,6 @@
 package usantatecla.mastermind.views.graphics;
 
+import usantatecla.mastermind.controllers.NullController;
 import usantatecla.mastermind.controllers.PlayController;
 import usantatecla.mastermind.controllers.ProposalController;
 import usantatecla.mastermind.controllers.ResumeController;
@@ -36,5 +37,7 @@ public class GraphicsView extends View {
 	@Override
 	public void visit(PlayController playController) {}
 
+	@Override
+	public void visit(NullController nullController) {}
 
 }

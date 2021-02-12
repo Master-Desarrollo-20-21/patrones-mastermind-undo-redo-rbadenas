@@ -8,4 +8,5 @@ public interface ControllersVisitor {
 	
 	void visit(ResumeController continueController);
 
+	void visit(NullController nullController);
 }
